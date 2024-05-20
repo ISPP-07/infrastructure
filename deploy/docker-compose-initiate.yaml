@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - webdata:/usr/share/nginx/html
+      - ./nginx.init.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - webdata:/usr/share/nginx/html
+    depends_on:
+      - nginx
+
+volumes:
+  webdata:

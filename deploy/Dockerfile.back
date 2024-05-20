@@ -1,0 +1,26 @@
+FROM python:3.11-alpine3.18
+
+RUN apk add --no-cache git
+
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir pipenv
+
+WORKDIR /app
+
+RUN git init
+
+RUN git config core.sparseCheckout true
+
+COPY back_tracked_files.txt .git/info/sparse-checkout
+
+RUN git remote add origin https://github.com/ISPP-07/backend.git
+
+RUN git pull --depth=1 origin develop
+
+RUN rm -rf .git
+
+RUN pipenv install gunicorn
+RUN pipenv install "pymongo[srv]"
+RUN pipenv install --deploy --ignore-pipfile
+
+COPY .env.back .env

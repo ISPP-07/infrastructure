@@ -1,0 +1,10 @@
+src/*
+public/*
+postcss.config.js
+tailwind.config.js
+transformerCSS.js
+babel.config.js
+next.config.mjs
+jsconfig.json
+package.json
+package-lock.json

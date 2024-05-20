@@ -1,0 +1,22 @@
+FROM node:21.7.3-alpine3.18
+
+RUN apk add --no-cache libc6-compat git
+
+WORKDIR /app
+RUN npm i -g pnpm
+
+RUN git init
+RUN git config core.sparseCheckout true
+
+COPY front_tracked_files.txt .git/info/sparse-checkout
+
+RUN git remote add origin https://github.com/ISPP-07/frontend-cyc.git
+RUN git pull --depth=1 origin develop
+
+RUN rm -rf .git
+
+COPY .env.front .env
+
+RUN pnpm install
+
+RUN pnpm build
