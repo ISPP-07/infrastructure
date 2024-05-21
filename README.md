@@ -46,5 +46,6 @@ Once the execution of the last command is finished, you will be able to access t
 - Whitelist ssh inbound cidr blocks
 - Automatize domain and email insertions (put them in tfvars along with the AWS profile)
 - Improve the security configuration of the nginx server
+- Set crontab to auto-renew the ssl certificate
 
 By addressing the above points, a cleaner, automated and reliable definition can be achieved.
