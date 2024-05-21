@@ -22,7 +22,7 @@ sudo mkdir -p /etc/letsencrypt
 sudo chown -R $USER:$USER /etc/letsencrypt
 
 sudo /usr/local/bin/docker-compose -f docker-compose-initiate.yaml up -d nginx
-sudo /usr/local/bin/docker-compose -f docker-compose-initiate.yaml run --rm certbot certonly --webroot --webroot-path=/usr/share/nginx/html -m harmonyltd@outlook.es --agree-tos --non-interactive -d harmony-prub.duckdns.org
+sudo /usr/local/bin/docker-compose -f docker-compose-initiate.yaml run --rm certbot certonly --webroot --webroot-path=/usr/share/nginx/html -m {{mail}} --agree-tos --non-interactive -d {{domain}}
 sudo /usr/local/bin/docker-compose -f docker-compose-initiate.yaml down
 
 sudo /usr/local/bin/docker-compose -f docker-compose.yaml up -d
